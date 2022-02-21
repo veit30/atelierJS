@@ -11,20 +11,24 @@
 
 <Svuick />
 
-<header class="flex justify-between items-center p-4">
-	<h1 class="text-3xl text-center">
-		<a href="/"> atelierJS </a>
-	</h1>
-	<nav class="flex gap-4">
-		<a href="/">Home</a>
-		{#if $session.supabase.user}
-			<a href="/profile">{$session.supabase.user.email}</a>
-			<a on:click|preventDefault={() => auth.signOut()} href="/logout">Log out</a>
-		{:else}
-			<a href="/signin">Sign in</a>
-			<a href="/signup">Sign up</a>
-		{/if}
-	</nav>
-</header>
+<div class="min-h-screen flex flex-col">
+	<header class="flex justify-between items-center p-4">
+		<h1 class="text-3xl text-center">
+			<a href="/"> atelierJS </a>
+		</h1>
+		<nav class="flex gap-4">
+			<a href="/">Home</a>
+			{#if $session.supabase.user}
+				<a href="/profile">{$session.supabase.user.email}</a>
+				<a on:click|preventDefault={() => auth.signOut()} href="/logout">Log out</a>
+			{:else}
+				<a href="/signin">Sign in</a>
+				<a href="/signup">Sign up</a>
+			{/if}
+		</nav>
+	</header>
 
-<slot />
+	<main class="flex-grow flex flex-col">
+		<slot />
+	</main>
+</div>

@@ -3,15 +3,30 @@ create type public.profile_visibility as enum (
     'private', 'public'
 );
 
+
+
 -- USERS
 create table public.users (
     id uuid references auth.users (id) on delete cascade NOT NULL UNIQUE PRIMARY KEY,
     email varchar(255) NULL UNIQUE,
     username varchar(255) NULL,
-    visibility profile_visibility default 'private'
+    visibility profile_visibility default 'private',
+    bio text NULL,
+    profile_picture text NULL
 );
 comment on table public.users is 'Profile for each user.';
 comment on column public.users.id is 'References the supabase auth user.';
+
+create table public.user_socials (
+    user_id uuid references auth.users (id) on delete cascade NOT NULL UNIQUE PRIMARY KEY,
+    youtube text NULL,
+    twitch text NULL,
+    twitter text NULL,
+    facebook text NULL,
+    instagram text NULL
+);
+comment on table public.user_socials is 'Social links for each user.';
+comment on column public.user_socials.id is 'References the supabase auth user.';
 
 -- secure table
 alter table public.users enable row level security;

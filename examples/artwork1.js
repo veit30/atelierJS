@@ -1,5 +1,3 @@
-const HEIGHT = 800;
-const WIDTH = 800;
 let size = 1;
 
 let zoom = 1.0;
