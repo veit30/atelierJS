@@ -1,5 +1,8 @@
-import type { Uri } from './types';
+import { tick } from 'svelte';
 
+export function getBasepath(path: string) {
+	return path.substring(0, path.lastIndexOf('/'));
+}
 export function getBasename(path: string) {
 	return path.substring(path.lastIndexOf('/') + 1);
 }
@@ -12,8 +15,12 @@ export function getExtension(path: string) {
 	return path.substring(path.lastIndexOf('.'));
 }
 
-export function equalsUri(...uri: Uri[]) {
-	const [a, b, ...rest] = uri;
-	if (a.toString() !== b.toString()) return false;
-	return rest.length ? equalsUri(b, ...rest) : true;
+export function focus(node: HTMLElement) {
+	tick().then(() => {
+		node.focus();
+	});
+}
+
+export function joinPaths(...paths: string[]) {
+	return paths.map((p) => p.replace(/(^\/|$\/)/, '')).join('/') || '/';
 }

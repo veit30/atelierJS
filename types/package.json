@@ -1,0 +1,10 @@
+{
+	"scripts": {
+		"build": "rollup -c"
+	},
+	"devDependencies": {
+		"rollup": "^2.67.2",
+		"rollup-plugin-dts": "^4.1.0",
+		"typescript": "^4.5.5"
+	}
+}
