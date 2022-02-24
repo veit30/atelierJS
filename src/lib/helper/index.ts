@@ -67,7 +67,6 @@ export function createIframeSourceCode({
 				}
 			})
 		});
-
 		const __console__ = window.console;
 		const console = window.console = {
 			log(...args) {

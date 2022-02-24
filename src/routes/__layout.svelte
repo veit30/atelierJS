@@ -4,12 +4,14 @@
 
 <script lang="ts">
 	import { Svuick } from '$lib/svuick';
+	import IconProvider from '$lib/icon/IconProvider.svelte';
 	import { session } from '$app/stores';
 	import '../app.css';
 	import { auth } from '@svuick/supabase/app';
 </script>
 
 <Svuick />
+<IconProvider />
 
 <div class="min-h-screen flex flex-col">
 	<header class="flex justify-between items-center p-4">

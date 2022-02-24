@@ -1,5 +1,16 @@
-import { rollup } from 'rollup';
-import type { CompilerOutput } from './ide/types';
+import { rollup, SourceMap } from 'rollup';
+
+export type CompilerOutput =
+	| {
+			error: null;
+			code: string;
+			map: SourceMap;
+	  }
+	| {
+			error: Error;
+			code: null;
+			map: null;
+	  };
 
 export async function run(files: Map<string, string>, treeshake = true): Promise<CompilerOutput> {
 	try {

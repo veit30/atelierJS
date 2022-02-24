@@ -1,42 +1,56 @@
-import type { SourceMap } from 'rollup';
 import type { Writable } from 'svelte/store';
-import type IMonaco from 'monaco-editor';
 
-export type Uri = IMonaco.Uri;
-export type IModel = IMonaco.editor.ITextModel;
-
-export type IContext = Writable<{
-	monaco: typeof IMonaco;
-	editor: IMonaco.editor.IStandaloneCodeEditor;
-	models: Record<string, IMonaco.editor.ITextModel>;
-	files: IFile[];
-}> & {
-	openFile(path: string): void;
-	closeFile(path?: string): void;
-	addFile(path: string, content?: string): void;
-	removeFile(path: string): void;
-	renameFile(oldPath: string, newPath: string): void;
-};
+type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
 
 export interface IFile {
 	path: string;
 	content: string;
-	language?: string;
 }
 
-export interface ConsoleEntry {
+export interface IdeEvents {
+	openfile: Pick<IFile, 'path'>;
+	closefile: Pick<IFile, 'path'>;
+	newfile: IFile;
+	removefile: Pick<IFile, 'path'>;
+	changefile: IFile;
+}
+export interface ContextEvents {
+	'file:add': IFile;
+	'file:change': IFile;
+	'file:delete': Pick<IFile, 'path'>;
+	'file:open': Pick<IFile, 'path'>;
+	'file:opened': Pick<IFile, 'path'>;
+	'file:close': Pick<IFile, 'path'>;
+	'file:request_new': undefined;
+	'folder:request_new': undefined;
+
+	'console:log': IConsoleEntry;
+	'console:clear': undefined;
+
+	'editor:layout': undefined;
+	'editor:add_extra_lib': { content: string; path: string };
+	'editor:remove_extra_lib': { content: string; path: string };
+}
+
+export interface Context {
+	events: {
+		addEventListener<K extends keyof ContextEvents>(
+			type: K,
+			callback: (event: CustomEvent<ContextEvents[K]>) => void | Promise<void>,
+			options?: boolean | AddEventListenerOptions
+		): void;
+		removeEventListener<K extends keyof ContextEvents>(
+			type: K,
+			callback: (event: CustomEvent<ContextEvents[K]>) => void | Promise<void>,
+			options?: boolean | EventListenerOptions
+		): void;
+		dispatch<K extends keyof ContextEvents>(type: K, detail?: ContextEvents[K]): void;
+	};
+	focusedPath: Writable<string>;
+	files: Writable<IFile[]>;
+}
+
+export interface IConsoleEntry {
 	type: 'error' | 'info';
 	message: string;
 }
-
-export type CompilerOutput =
-	| {
-			error: null;
-			code: string;
-			map: SourceMap;
-	  }
-	| {
-			error: Error;
-			code: null;
-			map: null;
-	  };
