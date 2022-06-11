@@ -4,6 +4,7 @@
 	import { getBasename } from '../helper';
 	import type { IFile } from '../types';
 	import IdeTextEditor from './IdeTextEditor.svelte';
+	import IdeVisualEditor from './IdeVisualEditor.svelte';
 
 	export let showOpenFiles = false;
 	const { events } = getIDEContext();
@@ -12,6 +13,7 @@
 
 	function getComponent(filepath: string) {
 		if (!filepath) return null;
+		if (filepath === '/globals.json') return IdeVisualEditor;
 
 		return IdeTextEditor;
 	}
@@ -46,7 +48,7 @@
 	});
 </script>
 
-<div class="flex-grow flex flex-col">
+<div class="flex-grow flex flex-col max-h-full">
 	{#if showOpenFiles}
 		<div>
 			<ul class="flex h-8">
@@ -59,8 +61,8 @@
 						>
 							{getBasename(file.path)}
 							<span class="p-1" on:click|preventDefault|stopPropagation={() => closeFile(file)}
-								>&times;</span
-							>
+								>&times;
+							</span>
 						</button>
 					</li>
 				{/each}

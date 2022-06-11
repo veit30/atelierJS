@@ -41,6 +41,20 @@
 		if (!f) return;
 		f.content = file.content;
 		context.files.set((files = files));
+
+		// update types if globals.json changed
+		if (f.path === '/globals.json') {
+			try {
+				const data: Array<{ type: 'number' | 'string'; name: string; value: any }> = JSON.parse(
+					f.content
+				);
+				context.events.dispatch('editor:add_extra_lib', {
+					path: '/globals.d.ts',
+					content: data.map((e) => `declare const ${e.name}: ${e.type}`).join('\n')
+				});
+			} catch (err) {}
+		}
+
 		dispatch('changefile', f);
 	}
 	function handleOpenFile(e: CustomEvent<Pick<IFile, 'path'>>) {

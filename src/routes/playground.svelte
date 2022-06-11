@@ -3,7 +3,7 @@
 	import Artwork1 from '$lib/examples/artwork1';
 	import { createIframeSourceCode } from '$lib/helper';
 	import { SourceMapConsumer } from 'source-map';
-	import IDE, { IdeInstance } from '$lib/ide';
+	import IDE, { type IdeInstance } from '$lib/ide';
 	import Icon, { ICON } from '$lib/icon';
 
 	let HEIGHT = 800;
@@ -13,6 +13,7 @@
 	let removeEventListener: Function;
 	let iframe: HTMLIFrameElement;
 	let files = [
+		{ path: '/globals.json', content: '' },
 		{ path: '/main.js', content: Artwork1 },
 		{ path: '/very/deep/folder/test.js', content: '' }
 	];

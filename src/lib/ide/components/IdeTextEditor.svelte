@@ -48,6 +48,26 @@
 		};
 		monaco = await import('monaco-editor');
 		URI = monaco.Uri;
+
+		monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
+		monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+			// allowJs: true,
+			target: monaco.languages.typescript.ScriptTarget.ESNext
+			// noLib: true
+		});
+		monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+			allowJs: true,
+			// allowNonTsExtensions: true,
+			target: monaco.languages.typescript.ScriptTarget.ESNext
+			// noLib: true
+		});
+
+		// set lib
+		{
+			const content = await fetch('/types/lib.es5.d.ts').then((res) => res.text());
+			monaco.languages.typescript.javascriptDefaults.addExtraLib(content, 'lib.es5.d.ts');
+		}
+
 		monacoReady = true;
 	}
 </script>
@@ -110,24 +130,6 @@
 
 	onMount(async () => {
 		await setupMonaco();
-
-		monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
-		monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-			// allowJs: true,
-			target: monaco.languages.typescript.ScriptTarget.ESNext
-			// noLib: true
-		});
-		monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-			allowJs: true,
-			// allowNonTsExtensions: true,
-			target: monaco.languages.typescript.ScriptTarget.ESNext
-			// noLib: true
-		});
-
-		{
-			const content = await fetch('/types/lib.es5.d.ts').then((res) => res.text());
-			monaco.languages.typescript.javascriptDefaults.addExtraLib(content, 'lib.es5.d.ts');
-		}
 
 		$files.forEach((file) => {
 			const uri = URI.parse(file.path);

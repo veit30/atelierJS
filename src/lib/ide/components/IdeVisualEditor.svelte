@@ -1,30 +1,22 @@
 <script lang="ts">
-	type GlobalVarType = number | string;
-	interface GlobalVar {
-		name: string;
-		type: 'number' | 'string';
-		value: GlobalVarType;
-	}
+	type GlobalVar = { name: string } & (
+		| { type: 'number'; value: number }
+		| { type: 'string'; value: string }
+		| { type: 'boolean'; value: boolean }
+	);
 
-	let newType: GlobalVar['type'];
 	export let items: GlobalVar[] = [];
 
-	function getInputValue(e) {
-		return e.target.value;
-	}
-
-	function handleAddItem() {
-		items = [...items, { name: 'NewVar', type: newType, value: 0 }];
+	function handleAddItem(type: GlobalVar['type'], value: GlobalVar['value']) {
+		items = [...items, { name: 'NewVar', type, value }] as GlobalVar[];
 	}
 </script>
 
 <div class="flex flex-col gap-2 p-2">
 	<div class="flex w-max gap-2">
-		<select bind:value={newType} class="bg-[#1e1e1e] w-full cursor-pointer">
-			<option value="number">Number</option>
-			<option value="string">String</option>
-		</select>
-		<button on:click={handleAddItem} class="bg-green-700 hover:bg-green-800 px-2 py-1">add</button>
+		<button on:click={() => handleAddItem('number', 0)}>Number</button>
+		<button on:click={() => handleAddItem('string', '')}>String</button>
+		<button on:click={() => handleAddItem('boolean', false)}>Boolean</button>
 	</div>
 	<table class="text-left">
 		<tr>
@@ -37,12 +29,13 @@
 					<input type="text" bind:value={item.name} class="bg-transparent w-full" />
 				</td>
 				<td class="p-1">
-					<input
-						class="bg-transparent w-full"
-						type={item.type}
-						value={item.value}
-						on:input={(e) => (item.value = getInputValue(e))}
-					/>
+					{#if item.type === 'number'}
+						<input class="bg-transparent w-full" type="number" bind:value={item.value} />
+					{:else if item.type === 'string'}
+						<input class="bg-transparent w-full" type="text" bind:value={item.value} />
+					{:else if item.type === 'boolean'}
+						<input class="bg-transparent w-full" type="checkbox" bind:checked={item.value} />
+					{/if}
 				</td>
 			</tr>
 		{/each}

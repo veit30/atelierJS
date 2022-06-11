@@ -1,4 +1,4 @@
-import { rollup, SourceMap } from 'rollup';
+import { rollup, type SourceMap } from 'rollup';
 
 export type CompilerOutput =
 	| {
