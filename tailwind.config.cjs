@@ -1,6 +1,4 @@
-/**
- * @type {import('tailwindcss/tailwind-config').TailwindConfig}
- */
+/** @type {import('tailwindcss').Config} */
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
