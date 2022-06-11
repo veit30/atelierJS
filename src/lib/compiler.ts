@@ -20,7 +20,7 @@ export async function run(files: Map<string, string>, treeshake = true): Promise
 			plugins: [
 				{
 					name: 'resolve',
-					resolveId(source, importer, options) {
+					resolveId(source, _importer, _options) {
 						if (source.startsWith('http')) {
 							const url = new URL(source);
 							if (url.origin !== window.location.origin) return false;
@@ -33,9 +33,11 @@ export async function run(files: Map<string, string>, treeshake = true): Promise
 							const data = await fetch(id).then((res) => res.text());
 							return data;
 						}
+						if (!files.has(id)) return null;
+
 						if (id === '/main.js')
 							return {
-								code: files.get(id),
+								code: files.get(id)!,
 								moduleSideEffects: 'no-treeshake'
 							};
 						return files.get(id);
@@ -47,8 +49,8 @@ export async function run(files: Map<string, string>, treeshake = true): Promise
 		const {
 			output: [{ code, map }]
 		} = await build.generate({ format: 'es', sourcemap: true });
-		return { error: null, code, map };
+		return { error: null, code, map: map! };
 	} catch (error) {
-		return { error, code: null, map: null };
+		return { error: error as Error, code: null, map: null };
 	}
 }

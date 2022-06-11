@@ -3,13 +3,13 @@
 // See https://kit.svelte.dev/docs#typescript
 // for information about these interfaces
 declare namespace App {
-	interface Locals {
-		userid: string;
-	}
+	type AuthSession = import('@supabase/auth-helpers-svelte').Session;
+
+	interface Locals extends Required<AuthSession> {}
 
 	interface Platform {}
 
-	interface Session {}
+	interface Session extends AuthSession {}
 
 	interface Stuff {}
 }

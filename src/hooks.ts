@@ -1,11 +1,20 @@
-import { register } from '@svuick/core/hooks';
-import cookie from '@svuick/cookie/hooks';
-import supabase from '@svuick/supabase/hooks';
+import type { GetSession, Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+import { handleUser, handleCallback } from '@supabase/auth-helpers-sveltekit';
 
-register(cookie);
-register(supabase, {
-	supabaseUrl: import.meta.env.VITE_SUPABASE_URL as string,
-	supabaseKey: import.meta.env.VITE_SUPABASE_ANON_KEY as string
-});
+const cookieOptions = {
+	lifetime: 1 * 365 * 24 * 60 * 60
+};
 
-export { handle, getSession } from '@svuick/core/hooks';
+export const handle: Handle = sequence(
+	handleCallback({ cookieOptions }),
+	handleUser({ cookieOptions })
+);
+
+export const getSession: GetSession = async (event) => {
+	const { user, accessToken } = event.locals;
+	return {
+		user,
+		accessToken
+	};
+};

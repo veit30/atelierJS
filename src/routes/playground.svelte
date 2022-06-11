@@ -33,7 +33,7 @@
 
 			switch (type) {
 				case 'error':
-					await SourceMapConsumer.with(map, null, (consumer) => {
+					await SourceMapConsumer.with(map!, null, (consumer) => {
 						const pos = consumer.originalPositionFor({
 							column: data.column,
 							line: data.line

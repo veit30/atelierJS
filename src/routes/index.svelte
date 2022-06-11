@@ -1,10 +1,11 @@
 <script context="module" lang="ts">
 	import type { Artwork } from '$lib/types/Artworks';
-	import type { Load } from '@sveltejs/kit';
+	import type { Load } from './__types/index.d';
+	import { supabase } from '$lib/db';
 
 	export const prerender = true;
 
-	export const load: Load = async function ({ stuff: { supabase } }) {
+	export const load: Load = async function () {
 		const { error, data } = await supabase
 			.from<Artwork>('artworks')
 			.select('title, description')
@@ -23,9 +24,6 @@
 </script>
 
 <script lang="ts">
-	import { session } from '$app/stores';
-	import { supabase } from '@svuick/supabase/app';
-
 	export let artworks: Artwork[];
 </script>
 
