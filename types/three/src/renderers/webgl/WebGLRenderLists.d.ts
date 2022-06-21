@@ -8,59 +8,59 @@ import { BufferGeometry } from '../../core/BufferGeometry';
 import { WebGLProperties } from './WebGLProperties';
 
 export interface RenderItem {
-    id: number;
-    object: Object3D;
-    geometry: BufferGeometry | null;
-    material: Material;
-    program: WebGLProgram;
-    groupOrder: number;
-    renderOrder: number;
-    z: number;
-    group: Group | null;
+	id: number;
+	object: Object3D;
+	geometry: BufferGeometry | null;
+	material: Material;
+	program: WebGLProgram;
+	groupOrder: number;
+	renderOrder: number;
+	z: number;
+	group: Group | null;
 }
 
 export class WebGLRenderList {
-    constructor(properties: WebGLProperties);
+	constructor(properties: WebGLProperties);
 
-    /**
-     * @default []
-     */
-    opaque: RenderItem[];
+	/**
+	 * @default []
+	 */
+	opaque: RenderItem[];
 
-    /**
-     * @default []
-     */
-    transparent: RenderItem[];
+	/**
+	 * @default []
+	 */
+	transparent: RenderItem[];
 
-    /**
-     * @default []
-     */
-    transmissive: RenderItem[];
+	/**
+	 * @default []
+	 */
+	transmissive: RenderItem[];
 
-    init(): void;
-    push(
-        object: Object3D,
-        geometry: BufferGeometry | null,
-        material: Material,
-        groupOrder: number,
-        z: number,
-        group: Group | null,
-    ): void;
-    unshift(
-        object: Object3D,
-        geometry: BufferGeometry | null,
-        material: Material,
-        groupOrder: number,
-        z: number,
-        group: Group | null,
-    ): void;
-    sort(opaqueSort: (a: any, b: any) => number, transparentSort: (a: any, b: any) => number): void;
-    finish(): void;
+	init(): void;
+	push(
+		object: Object3D,
+		geometry: BufferGeometry | null,
+		material: Material,
+		groupOrder: number,
+		z: number,
+		group: Group | null
+	): void;
+	unshift(
+		object: Object3D,
+		geometry: BufferGeometry | null,
+		material: Material,
+		groupOrder: number,
+		z: number,
+		group: Group | null
+	): void;
+	sort(opaqueSort: (a: any, b: any) => number, transparentSort: (a: any, b: any) => number): void;
+	finish(): void;
 }
 
 export class WebGLRenderLists {
-    constructor(properties: WebGLProperties);
+	constructor(properties: WebGLProperties);
 
-    dispose(): void;
-    get(scene: Scene, renderCallDepth: number): WebGLRenderList;
+	dispose(): void;
+	get(scene: Scene, renderCallDepth: number): WebGLRenderList;
 }

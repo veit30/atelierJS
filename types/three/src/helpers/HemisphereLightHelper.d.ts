@@ -6,15 +6,15 @@ import { Object3D } from './../core/Object3D';
 import { ColorRepresentation } from '../utils';
 
 export class HemisphereLightHelper extends Object3D {
-    constructor(light: HemisphereLight, size: number, color?: ColorRepresentation);
+	constructor(light: HemisphereLight, size: number, color?: ColorRepresentation);
 
-    light: HemisphereLight;
-    matrix: Matrix4;
-    matrixAutoUpdate: boolean;
-    material: MeshBasicMaterial;
+	light: HemisphereLight;
+	matrix: Matrix4;
+	matrixAutoUpdate: boolean;
+	material: MeshBasicMaterial;
 
-    color: ColorRepresentation | undefined;
+	color: ColorRepresentation | undefined;
 
-    dispose(): void;
-    update(): void;
+	dispose(): void;
+	update(): void;
 }

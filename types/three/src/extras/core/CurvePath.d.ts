@@ -2,25 +2,25 @@ import { Curve } from './Curve';
 import { Vector } from './../../math/Vector2';
 
 export class CurvePath<T extends Vector> extends Curve<T> {
-    constructor();
+	constructor();
 
-    /**
-     * @default 'CurvePath'
-     */
-    type: string;
+	/**
+	 * @default 'CurvePath'
+	 */
+	type: string;
 
-    /**
-     * @default []
-     */
-    curves: Array<Curve<T>>;
+	/**
+	 * @default []
+	 */
+	curves: Array<Curve<T>>;
 
-    /**
-     * @default false
-     */
-    autoClose: boolean;
+	/**
+	 * @default false
+	 */
+	autoClose: boolean;
 
-    add(curve: Curve<T>): void;
-    closePath(): void;
-    getPoint(t: number, optionalTarget?: T): T;
-    getCurveLengths(): number[];
+	add(curve: Curve<T>): void;
+	closePath(): void;
+	getPoint(t: number, optionalTarget?: T): T;
+	getCurveLengths(): number[];
 }

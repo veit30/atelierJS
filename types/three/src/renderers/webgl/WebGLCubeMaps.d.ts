@@ -1,8 +1,8 @@
 import { WebGLRenderer } from '../WebGLRenderer';
 
 export class WebGLCubeMaps {
-    constructor(renderer: WebGLRenderer);
+	constructor(renderer: WebGLRenderer);
 
-    get(texture: any): any;
-    dispose(): void;
+	get(texture: any): any;
+	dispose(): void;
 }

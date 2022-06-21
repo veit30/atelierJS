@@ -7,32 +7,32 @@ import { WebGLObjects } from './WebGLObjects';
 import { Light } from '../../lights/Light';
 
 export class WebGLShadowMap {
-    constructor(_renderer: WebGLRenderer, _objects: WebGLObjects, _capabilities: WebGLCapabilities);
+	constructor(_renderer: WebGLRenderer, _objects: WebGLObjects, _capabilities: WebGLCapabilities);
 
-    /**
-     * @default false
-     */
-    enabled: boolean;
+	/**
+	 * @default false
+	 */
+	enabled: boolean;
 
-    /**
-     * @default true
-     */
-    autoUpdate: boolean;
+	/**
+	 * @default true
+	 */
+	autoUpdate: boolean;
 
-    /**
-     * @default false
-     */
-    needsUpdate: boolean;
+	/**
+	 * @default false
+	 */
+	needsUpdate: boolean;
 
-    /**
-     * @default THREE.PCFShadowMap
-     */
-    type: ShadowMapType;
+	/**
+	 * @default THREE.PCFShadowMap
+	 */
+	type: ShadowMapType;
 
-    render(shadowsArray: Light[], scene: Scene, camera: Camera): void;
+	render(shadowsArray: Light[], scene: Scene, camera: Camera): void;
 
-    /**
-     * @deprecated Use {@link Material#shadowSide} instead.
-     */
-    cullFace: any;
+	/**
+	 * @deprecated Use {@link Material#shadowSide} instead.
+	 */
+	cullFace: any;
 }

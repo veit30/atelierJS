@@ -14,33 +14,33 @@ import { ColorRepresentation } from '../utils';
  * scene.add( directionalLight );
  */
 export class DirectionalLight extends Light {
-    constructor(color?: ColorRepresentation, intensity?: number);
+	constructor(color?: ColorRepresentation, intensity?: number);
 
-    /**
-     * @default 'DirectionalLight'
-     */
-    type: string;
+	/**
+	 * @default 'DirectionalLight'
+	 */
+	type: string;
 
-    /**
-     * @default THREE.Object3D.DefaultUp
-     */
-    readonly position: Vector3;
+	/**
+	 * @default THREE.Object3D.DefaultUp
+	 */
+	readonly position: Vector3;
 
-    /**
-     * Target used for shadow camera orientation.
-     * @default new THREE.Object3D()
-     */
-    target: Object3D;
+	/**
+	 * Target used for shadow camera orientation.
+	 * @default new THREE.Object3D()
+	 */
+	target: Object3D;
 
-    /**
-     * Light's intensity.
-     * @default 1
-     */
-    intensity: number;
+	/**
+	 * Light's intensity.
+	 * @default 1
+	 */
+	intensity: number;
 
-    /**
-     * @default new THREE.DirectionalLightShadow()
-     */
-    shadow: DirectionalLightShadow;
-    readonly isDirectionalLight: true;
+	/**
+	 * @default new THREE.DirectionalLightShadow()
+	 */
+	shadow: DirectionalLightShadow;
+	readonly isDirectionalLight: true;
 }

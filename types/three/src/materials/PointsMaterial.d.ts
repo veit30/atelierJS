@@ -4,45 +4,45 @@ import { Texture } from './../textures/Texture';
 import { ColorRepresentation } from '../utils';
 
 export interface PointsMaterialParameters extends MaterialParameters {
-    color?: ColorRepresentation | undefined;
-    map?: Texture | null | undefined;
-    alphaMap?: Texture | null | undefined;
-    size?: number | undefined;
-    sizeAttenuation?: boolean | undefined;
+	color?: ColorRepresentation | undefined;
+	map?: Texture | null | undefined;
+	alphaMap?: Texture | null | undefined;
+	size?: number | undefined;
+	sizeAttenuation?: boolean | undefined;
 }
 
 export class PointsMaterial extends Material {
-    constructor(parameters?: PointsMaterialParameters);
+	constructor(parameters?: PointsMaterialParameters);
 
-    /**
-     * @default 'PointsMaterial'
-     */
-    type: string;
+	/**
+	 * @default 'PointsMaterial'
+	 */
+	type: string;
 
-    /**
-     * @default new THREE.Color( 0xffffff )
-     */
-    color: Color;
+	/**
+	 * @default new THREE.Color( 0xffffff )
+	 */
+	color: Color;
 
-    /**
-     * @default null
-     */
-    map: Texture | null;
+	/**
+	 * @default null
+	 */
+	map: Texture | null;
 
-    /**
-     * @default null
-     */
-    alphaMap: Texture | null;
+	/**
+	 * @default null
+	 */
+	alphaMap: Texture | null;
 
-    /**
-     * @default 1
-     */
-    size: number;
+	/**
+	 * @default 1
+	 */
+	size: number;
 
-    /**
-     * @default true
-     */
-    sizeAttenuation: boolean;
+	/**
+	 * @default true
+	 */
+	sizeAttenuation: boolean;
 
-    setValues(parameters: PointsMaterialParameters): void;
+	setValues(parameters: PointsMaterialParameters): void;
 }

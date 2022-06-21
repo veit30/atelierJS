@@ -2,19 +2,19 @@ export const REVISION: string;
 
 // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent.button
 export enum MOUSE {
-    LEFT = 0,
-    MIDDLE = 1,
-    RIGHT = 2,
-    ROTATE = 0,
-    DOLLY = 1,
-    PAN = 2,
+	LEFT = 0,
+	MIDDLE = 1,
+	RIGHT = 2,
+	ROTATE = 0,
+	DOLLY = 1,
+	PAN = 2
 }
 
 export enum TOUCH {
-    ROTATE,
-    PAN,
-    DOLLY_PAN,
-    DOLLY_ROTATE,
+	ROTATE,
+	PAN,
+	DOLLY_PAN,
+	DOLLY_ROTATE
 }
 
 // GL STATE CONSTANTS
@@ -168,67 +168,67 @@ export const _SRGBAFormat: PixelFormat; // fallback for WebGL 1
 
 // Internal Pixel Formats
 export type PixelFormatGPU =
-    | 'ALPHA'
-    | 'RGB'
-    | 'RGBA'
-    | 'LUMINANCE'
-    | 'LUMINANCE_ALPHA'
-    | 'RED_INTEGER'
-    | 'R8'
-    | 'R8_SNORM'
-    | 'R8I'
-    | 'R8UI'
-    | 'R16I'
-    | 'R16UI'
-    | 'R16F'
-    | 'R32I'
-    | 'R32UI'
-    | 'R32F'
-    | 'RG8'
-    | 'RG8_SNORM'
-    | 'RG8I'
-    | 'RG8UI'
-    | 'RG16I'
-    | 'RG16UI'
-    | 'RG16F'
-    | 'RG32I'
-    | 'RG32UI'
-    | 'RG32F'
-    | 'RGB565'
-    | 'RGB8'
-    | 'RGB8_SNORM'
-    | 'RGB8I'
-    | 'RGB8UI'
-    | 'RGB16I'
-    | 'RGB16UI'
-    | 'RGB16F'
-    | 'RGB32I'
-    | 'RGB32UI'
-    | 'RGB32F'
-    | 'RGB9_E5'
-    | 'SRGB8'
-    | 'R11F_G11F_B10F'
-    | 'RGBA4'
-    | 'RGBA8'
-    | 'RGBA8_SNORM'
-    | 'RGBA8I'
-    | 'RGBA8UI'
-    | 'RGBA16I'
-    | 'RGBA16UI'
-    | 'RGBA16F'
-    | 'RGBA32I'
-    | 'RGBA32UI'
-    | 'RGBA32F'
-    | 'RGB5_A1'
-    | 'RGB10_A2'
-    | 'RGB10_A2UI'
-    | 'SRGB8_ALPHA8'
-    | 'SRGB8'
-    | 'DEPTH_COMPONENT16'
-    | 'DEPTH_COMPONENT24'
-    | 'DEPTH_COMPONENT32F'
-    | 'DEPTH24_STENCIL8'
-    | 'DEPTH32F_STENCIL8';
+	| 'ALPHA'
+	| 'RGB'
+	| 'RGBA'
+	| 'LUMINANCE'
+	| 'LUMINANCE_ALPHA'
+	| 'RED_INTEGER'
+	| 'R8'
+	| 'R8_SNORM'
+	| 'R8I'
+	| 'R8UI'
+	| 'R16I'
+	| 'R16UI'
+	| 'R16F'
+	| 'R32I'
+	| 'R32UI'
+	| 'R32F'
+	| 'RG8'
+	| 'RG8_SNORM'
+	| 'RG8I'
+	| 'RG8UI'
+	| 'RG16I'
+	| 'RG16UI'
+	| 'RG16F'
+	| 'RG32I'
+	| 'RG32UI'
+	| 'RG32F'
+	| 'RGB565'
+	| 'RGB8'
+	| 'RGB8_SNORM'
+	| 'RGB8I'
+	| 'RGB8UI'
+	| 'RGB16I'
+	| 'RGB16UI'
+	| 'RGB16F'
+	| 'RGB32I'
+	| 'RGB32UI'
+	| 'RGB32F'
+	| 'RGB9_E5'
+	| 'SRGB8'
+	| 'R11F_G11F_B10F'
+	| 'RGBA4'
+	| 'RGBA8'
+	| 'RGBA8_SNORM'
+	| 'RGBA8I'
+	| 'RGBA8UI'
+	| 'RGBA16I'
+	| 'RGBA16UI'
+	| 'RGBA16F'
+	| 'RGBA32I'
+	| 'RGBA32UI'
+	| 'RGBA32F'
+	| 'RGB5_A1'
+	| 'RGB10_A2'
+	| 'RGB10_A2UI'
+	| 'SRGB8_ALPHA8'
+	| 'SRGB8'
+	| 'DEPTH_COMPONENT16'
+	| 'DEPTH_COMPONENT24'
+	| 'DEPTH_COMPONENT32F'
+	| 'DEPTH24_STENCIL8'
+	| 'DEPTH32F_STENCIL8';
 
 // Compressed texture formats
 // DDS / ST3C Compressed texture formats
@@ -354,22 +354,22 @@ export const GLSL1: GLSLVersion;
 export const GLSL3: GLSLVersion;
 
 export type BuiltinShaderAttributeName =
-    | 'position'
-    | 'normal'
-    | 'uv'
-    | 'color'
-    | 'skinIndex'
-    | 'skinWeight'
-    | 'instanceMatrix'
-    | 'morphTarget0'
-    | 'morphTarget1'
-    | 'morphTarget2'
-    | 'morphTarget3'
-    | 'morphTarget4'
-    | 'morphTarget5'
-    | 'morphTarget6'
-    | 'morphTarget7'
-    | 'morphNormal0'
-    | 'morphNormal1'
-    | 'morphNormal2'
-    | 'morphNormal3';
+	| 'position'
+	| 'normal'
+	| 'uv'
+	| 'color'
+	| 'skinIndex'
+	| 'skinWeight'
+	| 'instanceMatrix'
+	| 'morphTarget0'
+	| 'morphTarget1'
+	| 'morphTarget2'
+	| 'morphTarget3'
+	| 'morphTarget4'
+	| 'morphTarget5'
+	| 'morphTarget6'
+	| 'morphTarget7'
+	| 'morphNormal0'
+	| 'morphNormal1'
+	| 'morphNormal2'
+	| 'morphNormal3';

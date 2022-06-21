@@ -113,4 +113,10 @@ export function floorPowerOfTwo(value: number): number;
 
 export function ceilPowerOfTwo(value: number): number;
 
-export function setQuaternionFromProperEuler(q: Quaternion, a: number, b: number, c: number, order: string): void;
+export function setQuaternionFromProperEuler(
+	q: Quaternion,
+	a: number,
+	b: number,
+	c: number,
+	order: string
+): void;

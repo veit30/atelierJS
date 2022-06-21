@@ -5,18 +5,18 @@ import { LineSegments } from '../objects/LineSegments';
 import { ColorRepresentation } from '../utils';
 
 export class SpotLightHelper extends Object3D {
-    constructor(light: Light, color?: ColorRepresentation);
+	constructor(light: Light, color?: ColorRepresentation);
 
-    light: Light;
-    matrix: Matrix4;
+	light: Light;
+	matrix: Matrix4;
 
-    /**
-     * @default false
-     */
-    matrixAutoUpdate: boolean;
-    color: ColorRepresentation | undefined;
-    cone: LineSegments;
+	/**
+	 * @default false
+	 */
+	matrixAutoUpdate: boolean;
+	color: ColorRepresentation | undefined;
+	cone: LineSegments;
 
-    dispose(): void;
-    update(): void;
+	dispose(): void;
+	update(): void;
 }

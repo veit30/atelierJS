@@ -25,7 +25,6 @@ const config = {
 			},
 			resolve: {
 				alias: {
-					// these are the aliases and paths to them
 					$theme: path.resolve('./src/theme')
 				}
 			}

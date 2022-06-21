@@ -9,34 +9,34 @@ import { PointLightShadow } from './PointLightShadow';
  * scene.add( light );
  */
 export class PointLight extends Light {
-    constructor(color?: ColorRepresentation, intensity?: number, distance?: number, decay?: number);
+	constructor(color?: ColorRepresentation, intensity?: number, distance?: number, decay?: number);
 
-    /**
-     * @default 'PointLight'
-     */
-    type: string;
+	/**
+	 * @default 'PointLight'
+	 */
+	type: string;
 
-    /**
-     * Light's intensity.
-     * @default 1
-     */
-    intensity: number;
+	/**
+	 * Light's intensity.
+	 * @default 1
+	 */
+	intensity: number;
 
-    /**
-     * If non-zero, light will attenuate linearly from maximum intensity at light position down to zero at distance.
-     * @default 0
-     */
-    distance: number;
+	/**
+	 * If non-zero, light will attenuate linearly from maximum intensity at light position down to zero at distance.
+	 * @default 0
+	 */
+	distance: number;
 
-    /**
-     * @default 1
-     */
-    decay: number;
+	/**
+	 * @default 1
+	 */
+	decay: number;
 
-    /**
-     * @default new THREE.PointLightShadow()
-     */
-    shadow: PointLightShadow;
+	/**
+	 * @default new THREE.PointLightShadow()
+	 */
+	shadow: PointLightShadow;
 
-    power: number;
+	power: number;
 }

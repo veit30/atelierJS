@@ -33,14 +33,15 @@ export async function run(files: Map<string, string>, treeshake = true): Promise
 							const data = await fetch(id).then((res) => res.text());
 							return data;
 						}
-						if (!files.has(id)) return null;
+						const file = files.get(id);
+						if (!file) return null;
 
-						if (id === '/main.js')
+						if (id === '/main.js' && file)
 							return {
-								code: files.get(id)!,
+								code: file,
 								moduleSideEffects: 'no-treeshake'
 							};
-						return files.get(id);
+						return file;
 					}
 				}
 			]

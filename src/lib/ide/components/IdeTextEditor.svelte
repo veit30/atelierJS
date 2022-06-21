@@ -11,6 +11,7 @@
 	let registry: Registry;
 	let grammars: Map<any, any>;
 
+	//TODO: fix ts errors
 	function createModel(uri: IMonaco.Uri, value: string): IMonaco.editor.ITextModel {
 		const existingModel = monaco.editor.getModel(uri);
 		if (refs.has(uri) && existingModel) {
@@ -129,7 +130,6 @@
 		};
 		monaco = await import('monaco-editor');
 		URI = monaco.Uri;
-<<<<<<< HEAD
 
 		monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
 		monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -150,9 +150,7 @@
 			monaco.languages.typescript.javascriptDefaults.addExtraLib(content, 'lib.es5.d.ts');
 		}
 
-=======
 		await loadTokenizer();
->>>>>>> bc09633 (Add editor styles)
 		monacoReady = true;
 	}
 </script>
@@ -166,6 +164,7 @@
 	import type { IFile } from '../types';
 	import { text } from 'svelte/internal';
 	import AtlierJsDark from '$theme/atelierjs-dark.json';
+	import type { IDisposable } from 'monaco-editor';
 
 	const { events, files } = getIDEContext();
 
@@ -178,17 +177,18 @@
 		createModel(uri, file.content);
 		uris.add(uri);
 	}
-	function handleDeleteFile({ detail: file }: CustomEvent<IFile>) {
+	//TODO: check for correct typing
+	function handleDeleteFile({ detail: file }: CustomEvent<Pick<IFile, 'path'>>) {
 		const uri = URI.parse(file.path);
 		disposeModel(uri, true);
 		uris.delete(uri);
 	}
-	function handleOpenFile({ detail: file }: CustomEvent<IFile>) {
+	function handleOpenFile({ detail: file }: CustomEvent<Pick<IFile, 'path'>>) {
 		let model = monaco.editor.getModel(URI.parse(file.path));
 		if (!model) return;
 		editor.setModel(model);
 	}
-	function handleCloseFile({ detail: file }: CustomEvent<IFile>) {
+	function handleCloseFile({ detail: file }: CustomEvent<Pick<IFile, 'path'>>) {
 		editor.setModel(null);
 	}
 
@@ -206,7 +206,7 @@
 	function handleRemoveExtraLib({ detail: lib }: CustomEvent<IFile>) {
 		if (extraLibs.has(lib.path)) {
 			const disposeAble = extraLibs.get(lib.path);
-			disposeAble.dispose();
+			disposeAble?.dispose();
 			extraLibs.delete(lib.path);
 		}
 	}
@@ -254,21 +254,24 @@
 			}
 		});
 
-		let disposeChangeContentListener;
+		let disposeChangeContentListener: IDisposable | null;
 		editor.onDidChangeModel((e) => {
 			if (typeof disposeChangeContentListener === 'function') {
+				//TODO: fix typescript errors
+				//@ts-ignore
 				disposeChangeContentListener();
 				disposeChangeContentListener = null;
 			}
 			if (e.newModelUrl) {
 				events.dispatch('file:opened', { path: e.newModelUrl.path });
 				const model = editor.getModel();
-				disposeChangeContentListener = model.onDidChangeContent(() => {
-					events.dispatch('file:change', {
-						path: model.uri.path,
-						content: model.getValue()
-					});
-				});
+				disposeChangeContentListener =
+					model?.onDidChangeContent(() => {
+						events.dispatch('file:change', {
+							path: model.uri.path,
+							content: model.getValue()
+						});
+					}) ?? null;
 			}
 		});
 
