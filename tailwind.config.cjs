@@ -5,7 +5,17 @@ const config = {
 	theme: {
 		extend: {
 			backgroundColor: {
-				primary: '#C0BCB1'
+				primary: '#454344',
+				secondary: '#363434'
+			},
+			textColor: {
+				text: {
+					primary: '#FBF6F2'
+				}
+			},
+			fontFamily: {
+				serif: ['Prata', 'serif'],
+				sans: ['Noto Sans', 'sans-serif']
 			}
 		}
 	},

@@ -1,10 +1,15 @@
 <script lang="ts" context="module">
 	import type IMonaco from 'monaco-editor';
+	import { loadWASM } from 'onigasm';
+	import { Registry } from 'monaco-textmate';
+	import { wireTmGrammars } from 'monaco-editor-textmate';
 
 	let monacoReady = false;
 	let monaco: typeof IMonaco;
 	let URI: typeof IMonaco.Uri;
 	const refs = new Map<IMonaco.Uri, number>();
+	let registry: Registry;
+	let grammars: Map<any, any>;
 
 	function createModel(uri: IMonaco.Uri, value: string): IMonaco.editor.ITextModel {
 		const existingModel = monaco.editor.getModel(uri);
@@ -16,6 +21,7 @@
 		refs.set(uri, 1);
 		return existingModel ?? monaco.editor.createModel(value, null, uri);
 	}
+
 	function disposeModel(uri: IMonaco.Uri, force = false) {
 		if (refs.has(uri)) {
 			const count = refs.get(uri) - 1;
@@ -31,12 +37,87 @@
 		}
 	}
 
+	async function loadTokenizer() {
+		await loadWASM(`/lib/onigasm.wasm`);
+
+		//TODO: get grammars here: https://github.com/microsoft/vscode/tree/94c9ea46838a9a619aeafb7e8afd1170c967bb55/extensions
+
+		registry = new Registry({
+			getGrammarDefinition: async (scopeName) => {
+				switch (scopeName) {
+					case 'source.ts':
+						return {
+							format: 'json',
+							content: await (
+								await fetch(
+									`https://raw.githubusercontent.com/microsoft/vscode/main/extensions/typescript-basics/syntaxes/TypeScript.tmLanguage.json`
+								)
+							).text()
+						};
+					case 'source.js':
+						return {
+							format: 'json',
+							content: await (
+								await fetch(
+									`https://raw.githubusercontent.com/microsoft/vscode/main/extensions/javascript/syntaxes/JavaScript.tmLanguage.json`
+								)
+							).text()
+						};
+					case 'source.json':
+						return {
+							format: 'json',
+							content: await (
+								await fetch(
+									`https://raw.githubusercontent.com/microsoft/vscode/main/extensions/json/syntaxes/JSON.tmLanguage.json`
+								)
+							).text()
+						};
+					case 'text.html.basic':
+						return {
+							format: 'json',
+							content: await (
+								await fetch(
+									`https://raw.githubusercontent.com/microsoft/vscode/main/extensions/json/syntaxes/JSON.tmLanguage.json`
+								)
+							).text()
+						};
+					case 'source.css':
+						return {
+							format: 'json',
+							content: await (
+								await fetch(
+									`https://raw.githubusercontent.com/microsoft/vscode/main/extensions/css/syntaxes/css.tmLanguage.json`
+								)
+							).text()
+						};
+					case 'text.html.markdown':
+					default:
+						return {
+							format: 'json',
+							content: `{}`
+						};
+				}
+			}
+		});
+
+		// map of monaco "language id's" to TextMate scopeNames
+		grammars = new Map();
+		grammars.set('css', 'source.css');
+		grammars.set('html', 'text.html.basic');
+		grammars.set('json', 'source.json');
+		grammars.set('typescript', 'source.ts');
+		grammars.set('javascript', 'source.js');
+		grammars.set('markdown', 'text.html.markdown');
+	}
+
 	async function setupMonaco() {
 		if (monacoReady) return;
 
 		// @ts-ignore
 		self.MonacoEnvironment = {
 			getWorker: function (_moduleId: any, label: string) {
+				console.log('getting worker', label);
+
 				if (label === 'json') {
 					return new jsonWorker();
 				}
@@ -48,6 +129,7 @@
 		};
 		monaco = await import('monaco-editor');
 		URI = monaco.Uri;
+<<<<<<< HEAD
 
 		monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
 		monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -68,6 +150,9 @@
 			monaco.languages.typescript.javascriptDefaults.addExtraLib(content, 'lib.es5.d.ts');
 		}
 
+=======
+		await loadTokenizer();
+>>>>>>> bc09633 (Add editor styles)
 		monacoReady = true;
 	}
 </script>
@@ -79,6 +164,8 @@
 	import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 	import { getIDEContext } from '../context';
 	import type { IFile } from '../types';
+	import { text } from 'svelte/internal';
+	import AtlierJsDark from '$theme/atelierjs-dark.json';
 
 	const { events, files } = getIDEContext();
 
@@ -131,6 +218,27 @@
 	onMount(async () => {
 		await setupMonaco();
 
+		// TODO: define monaco theme
+		monaco.editor.defineTheme('atelier-dark', AtlierJsDark);
+
+		monaco.languages.typescript.typescriptDefaults.setEagerModelSync(true);
+		monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+			// allowJs: true,
+			target: monaco.languages.typescript.ScriptTarget.ESNext
+			// noLib: true
+		});
+		monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+			allowJs: true,
+			// allowNonTsExtensions: true,
+			target: monaco.languages.typescript.ScriptTarget.ESNext
+			// noLib: true
+		});
+
+		{
+			const content = await fetch('/types/lib.es5.d.ts').then((res) => res.text());
+			monaco.languages.typescript.javascriptDefaults.addExtraLib(content, 'lib.es5.d.ts');
+		}
+
 		$files.forEach((file) => {
 			const uri = URI.parse(file.path);
 			createModel(uri, file.content);
@@ -138,7 +246,7 @@
 		});
 
 		editor = monaco.editor.create(targetEl, {
-			theme: 'vs-dark',
+			theme: 'atelier-dark',
 			model: null,
 			automaticLayout: false,
 			minimap: {
@@ -179,6 +287,8 @@
 		//     files = files;
 		//     dispatch('save');
 		// });
+
+		await wireTmGrammars(monaco, registry, grammars, editor);
 
 		events.addEventListener('file:add', handleAddFile);
 		events.addEventListener('file:delete', handleDeleteFile);

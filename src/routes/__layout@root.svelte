@@ -9,9 +9,9 @@
 <IconProvider />
 
 <div class="min-h-screen flex flex-col">
-	<header class="flex justify-between items-center p-4">
-		<h1 class="text-3xl text-center">
-			<a href="/"> atelierJS </a>
+	<header class="flex justify-between items-center p-4 bg-primary text-text-primary">
+		<h1 class="text-3xl text-center font-serif">
+			<a href="/">atelier JS | editor</a>
 		</h1>
 		<nav class="flex gap-4">
 			<a href="/">Home</a>

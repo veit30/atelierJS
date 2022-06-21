@@ -11756,13 +11756,10 @@ declare namespace p5 {
 }
 
 declare namespace p5$1 {
-  export {
-    p5 as default,
-  };
+	export { p5 as default };
 }
 
 // Global mode type definitions for p5
-
 
 declare global {
 	/**
