@@ -1,0 +1,776 @@
+# TODO: light theme
+
+colors:
+  - &WHITE '#ffffff'
+  - &BG_DARK '#454344'
+
+  - &GREY1 '#6a75a8'
+  - &GREY2 '#7582ba'
+  - &GREY3 '#9aa5ce'
+  - &GREY4 '#747ca1'
+  - &ORANGE1 '#ff9e64'
+  - &YELLOW '#e0af68'
+  - &GREEN1 '#9ece6a'
+  - &VIOLET1 '#bb9af7'
+  - &VIOLET2 '#9d7cd8'
+  - &VIOLET3 '#ba3c97'
+  - &RED1 '#ff5370'
+  - &RED2 '#f7768e'
+  - &RED3 '#de5971'
+  - &RED4 '#fc7b7b'
+  - &BLUE '#7aa2f7'
+  - &LIGHT_BLUE '#7dcfff'
+  - &LIGHT_BLUE2 '#89ddff'
+  - &LIGHT_BLUE3 '#c0caf5'
+  - &LIGHT_BLUE4 '#9abdf5'
+  - &TEAL '#2ac3de'
+  - &TEAL2 '#73daca'
+  - &DARK_BLUE '#4e5579'
+  - &DARK_BLUE2 '#565f89'
+
+  - &DEBUG '#b267e6'
+  - &WARN '#ffdb69'
+  - &ERROR '#db4b4b'
+  - &INSERTED '#449dab'
+  - &DELETED '#914c54'
+  - &CHANGED '#6183bb'
+  - &REGEX '#b4f9f8'
+
+styleTheme: []
+
+editorTheme:
+  type: dark
+  name: atelierjs-dark
+  colors:
+    editor.foreground: *WHITE
+    editor.background: *BG_DARK
+    editorCursor.foreground: *WHITE
+    editor.lineHighlightBackground: '#535152'
+    editorLineNumber.foreground: '#8C8B8B'
+    editorLineNumber.activeForeground: *WHITE
+    editor.selectionBackground: '#ffffff20'
+    editor.inactiveSelectionBackground: '#ffffff40'
+
+  tokenColors:
+    - name: Fallback token
+      scope: ''
+      settings:
+        foreground: *WHITE
+        background: *BG_DARK
+    - name: Italics - Comments, Storage, Keyword Flow, Vue attributes, Decorators
+      scope:
+        - comment
+        - keyword.control.return
+        - tag.decorator.js entity.name.tag.js
+        - tag.decorator.js punctuation.definition.tag.js
+      settings:
+        fontStyle: italic
+    - name: Comment
+      scope:
+        - comment
+        - comment.block.documentation
+        - punctuation.definition.comment
+        - comment.block.documentation punctuation
+      settings:
+        foreground: *DARK_BLUE2
+    - name: Comment Doc
+      scope:
+        - comment.block.documentation variable
+        - comment.block.documentation storage
+        - comment.block.documentation keyword
+        - comment.block.documentation support
+        - comment.block.documentation markup
+        - comment.block.documentation markup.inline.raw.string.markdown
+        - log.date
+      settings:
+        foreground: *GREY1
+    - name: Comment Doc Emphasized
+      scope:
+        - comment.block.documentation storage.type
+        - comment.block.documentation punctuation.definition.block.tag
+        - comment.block.documentation entity.name.type.instance
+      settings:
+        foreground: *GREY2
+    - name: Number, Boolean, Undefined, Null
+      scope:
+        - variable.other.constant
+        - punctuation.definition.constant
+        - constant.language
+        - constant.numeric
+        - support.constant
+      settings:
+        foreground: *ORANGE1
+    - name: String, Symbols
+      scope:
+        - string
+        - constant.other.symbol
+        - constant.other.key
+        - meta.attribute-selector
+      settings:
+        fontStyle: ''
+        foreground: *GREEN1
+    - name: Colors
+      scope:
+        - constant.other.color
+        - constant.other.color.rgb-value.hex punctuation.definition.constant
+      settings:
+        foreground: *GREY3
+    - name: Invalid
+      scope:
+        - invalid
+        - invalid.illegal
+      settings:
+        foreground: *RED1
+    - name: Invalid deprecated
+      scope: invalid.deprecated
+      settings:
+        foreground: *VIOLET1
+    - name: Storage Type
+      scope: storage.type
+      settings:
+        foreground: *VIOLET1
+    - name: Storage - modifier, var, const, let
+      scope:
+        - meta.var.expr storage.type
+        - storage.modifier
+      settings:
+        foreground: *VIOLET2
+    - name: Interpolation
+      scope:
+        - punctuation.definition.template-expression
+        - punctuation.section.embedded
+        - support.constant.handlebars
+      settings:
+        foreground: *LIGHT_BLUE
+    - name: Handlebars keyword
+      scope: support.constant.handlebars keyword.control
+      settings:
+        foreground: *TEAL
+    - name: Spread
+      scope:
+        - keyword.operator.spread
+        - keyword.operator.rest
+      settings:
+        fontStyle: bold
+        foreground: *RED2
+    - name: Operator, Misc
+      scope:
+        - keyword.operator
+        - keyword.control.as
+        - keyword.other
+        - keyword.operator.bitwise.shift
+        - punctuation
+        - punctuation.definition.constant.markdown
+        - punctuation.definition.string
+        - punctuation.support.type.property-name
+        - punctuation.definition.keyword
+        - punctuation.terminator.rule
+        - punctuation.definition.entity
+        - punctuation.separator.inheritance.php
+        - keyword.other.template
+        - keyword.other.substitution
+        - entity.name.operator
+        - meta.property-list punctuation.separator.key-value
+        - meta.at-rule.mixin punctuation.separator.key-value
+        - meta.at-rule.function variable.parameter.url
+      settings:
+        foreground: *LIGHT_BLUE2
+    - name: Import, Export, From, Default
+      scope:
+        - keyword.control.import
+        - keyword.control.export
+        - keyword.control.from
+        - keyword.control.default
+        - meta.import keyword.other
+      settings:
+        foreground: *LIGHT_BLUE
+    - name: Keyword
+      scope:
+        - keyword
+        - keyword.control
+        - keyword.other.important
+      settings:
+        foreground: *VIOLET1
+    - name: Keyword Operator Logical, Arrow, Ternary, Comparison
+      scope:
+        - keyword.operator.logical
+        - storage.type.function
+        - keyword.operator.bitwise
+        - keyword.operator.ternary
+        - keyword.operator.comparison
+        - keyword.operator.relational
+        - keyword.operator.or.regexp
+      settings:
+        foreground: *VIOLET1
+    - name: Tag
+      scope: entity.name.tag
+      settings:
+        foreground: *RED2
+    - name: Tag Component
+      scope:
+        - entity.name.tag support.class.component
+        - meta.tag
+      settings:
+        foreground: *RED3
+    - name: Tag Punctuation
+      scope: punctuation.definition.tag
+      settings:
+        foreground: *VIOLET3
+    - name: Globals
+      scope:
+        - variable.other.global
+        - variable.other.global punctuation.definition.variable
+      settings:
+        foreground: *YELLOW
+    - name: Globals
+      scope:
+        - variable.other.global
+        - variable.other.global punctuation.definition.variable
+      settings:
+        foreground: *YELLOW
+    - name: (Object) Variables
+      scope:
+        - variable
+        - support.variable
+        - string constant.other.placeholder
+        - variable.parameter.handlebars
+        - variable.other.object
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Variable Array Key
+      scope: meta.array.literal variable
+      settings:
+        foreground: *LIGHT_BLUE
+    - name: Object Key
+      scope:
+        - meta.object-literal.key
+        - meta.group.braces.curly constant.other.object.key.js string.unquoted.label.js
+        - meta.field.declaration.ts variable.object.property
+      settings:
+        foreground: *TEAL2
+    - name: Object Property
+      scope:
+        - variable.other.property
+        - support.variable.property
+        - support.variable.property.dom
+        - meta.function-call variable.other.object.property
+        - variable.other.object.property.cs
+      settings:
+        foreground: *LIGHT_BLUE
+    # TODO: check if relevant
+    - name: Object Property 2
+      scope: variable.other.object.property
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Other Variable
+      scope: support.other.variable
+      settings:
+        foreground: *RED2
+    - name: Methods
+      scope:
+        - meta.class-method.js entity.name.function.js
+        - entity.name.method.js
+        - variable.function.constructor
+        - keyword.other.special-method
+        - storage.type.cs
+      settings:
+        foreground: *BLUE
+    - name: Function Definition
+      scope:
+        - entity.name.function
+        - meta.function-call
+        - meta.function-call entity.name.function
+        - variable.function
+        - meta.definition.method entity.name.function
+        - meta.object-literal entity.name.function
+      settings:
+        foreground: *BLUE
+    - name: Function Argument
+      scope:
+        - variable.parameter.function.language.special
+        - variable.parameter
+        - meta.function.parameters punctuation.definition.variable
+        - meta.function.parameter variable
+      settings:
+        foreground: *YELLOW
+    - name: Constant, Tag Attribute and Variable Definition
+      scope:
+        - constant.character
+        - constant.escape
+        - keyword.other.unit
+        - meta.definition.variable variable.other.constant
+        - meta.definition.variable variable.other.readwrite
+        - variable.other.declaration
+      settings:
+        foreground: *VIOLET1
+    - name: Inherited Class
+      scope: entity.other.inherited-class
+      settings:
+        fontStyle: ''
+        foreground: *VIOLET1
+    - name: Class, Support, DOM, etc
+      scope:
+        - support.class
+        - support.type
+        - support.function
+        - variable.other.readwrite.alias
+        - support.type.sys-types
+        - support.variable.dom
+        - support.constant.math
+        - support.type.object.module
+        - support.constant.json
+        - entity.name.namespace
+        - meta.import.qualifier
+      settings:
+        foreground: *TEAL
+    - name: Class Name
+      scope: entity.name
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: CSS Class and Support
+      scope:
+        - source.css support.type.property-name
+        - source.sass support.type.property-name
+        - source.scss support.type.property-name
+        - source.less support.type.property-name
+        - source.stylus support.type.property-name
+        - source.postcss support.type.property-name
+        - support.type.property-name.css
+        - support.type.vendored.property-name
+        - support.type.map.key
+      settings:
+        foreground: *BLUE
+    - name: CSS Font
+      scope:
+        - support.constant.font-name
+        - meta.definition.variable
+      settings:
+        foreground: *GREEN1
+    - name: CSS Class
+      scope:
+        - entity.other.attribute-name.class
+        - meta.at-rule.mixin.scss entity.name.function.scss
+      settings:
+        foreground: *GREEN1
+    - name: CSS ID
+      scope: entity.other.attribute-name.id
+      settings:
+        foreground: *RED4
+    - name: CSS Tag
+      scope: entity.name.tag.css
+      settings:
+        foreground: *TEAL
+    - name: CSS Tag Reference, Pseudo & Class Punctuation
+      scope:
+        - entity.other.attribute-name.pseudo-class punctuation.definition.entity
+        - entity.other.attribute-name.pseudo-element punctuation.definition.entity
+        - entity.other.attribute-name.class punctuation.definition.entity
+        - entity.name.tag.reference
+      settings:
+        foreground: *YELLOW
+    - name: CSS Punctuation
+      scope: meta.property-list
+      settings:
+        foreground: *LIGHT_BLUE4
+    - name: CSS at-rule fix
+      scope:
+        - meta.property-list meta.at-rule.if
+        - meta.at-rule.return variable.parameter.url
+        - meta.property-list meta.at-rule.else
+      settings:
+        foreground: *ORANGE1
+    - name: CSS Parent Selector Entity
+      scope:
+        - >-
+          entity.other.attribute-name.parent-selector-suffix
+          punctuation.definition.entity.css
+      settings:
+        foreground: *TEAL2
+    - name: CSS Punctuation comma fix
+      scope: meta.property-list meta.property-list
+      settings:
+        foreground: *LIGHT_BLUE4
+    - name: SCSS @
+      scope:
+        - meta.at-rule.mixin keyword.control.at-rule.mixin
+        - meta.at-rule.include entity.name.function.scss
+        - meta.at-rule.include keyword.control.at-rule.include
+      settings:
+        foreground: *VIOLET1
+    - name: SCSS Mixins, Extends, Include Keyword
+      scope:
+        - keyword.control.at-rule.include punctuation.definition.keyword
+        - keyword.control.at-rule.mixin punctuation.definition.keyword
+        - meta.at-rule.include keyword.control.at-rule.include
+        - keyword.control.at-rule.extend punctuation.definition.keyword
+        - meta.at-rule.extend keyword.control.at-rule.extend
+        - >-
+          entity.other.attribute-name.placeholder.css
+          punctuation.definition.entity.css
+        - meta.at-rule.media keyword.control.at-rule.media
+        - meta.at-rule.mixin keyword.control.at-rule.mixin
+        - meta.at-rule.function keyword.control.at-rule.function
+        - keyword.control punctuation.definition.keyword
+      settings:
+        foreground: *VIOLET2
+    - name: SCSS Include Mixin Argument
+      scope: meta.property-list meta.at-rule.include
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: CSS value
+      scope: support.constant.property-value
+      settings:
+        foreground: *ORANGE1
+    - name: Sub-methods
+      scope:
+        - entity.name.module.js
+        - variable.import.parameter.js
+        - variable.other.class.js
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Language methods
+      scope: variable.language
+      settings:
+        foreground: *RED2
+    - name: Variable punctuation
+      scope: variable.other punctuation.definition.variable
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Keyword this with Punctuation, ES7 Bind Operator
+      scope:
+        - source.js constant.other.object.key.js string.unquoted.label.js
+        - variable.language.this punctuation.definition.variable
+        - keyword.other.this
+      settings:
+        foreground: *RED2
+    - name: HTML Attributes
+      scope:
+        - entity.other.attribute-name
+        - text.html.basic entity.other.attribute-name.html
+        - text.html.basic entity.other.attribute-name
+      settings:
+        foreground: *VIOLET1
+    - name: HTML Character Entity
+      scope: text.html constant.character.entity
+      settings:
+        foreground: *TEAL
+    - name: Vue Template attributes
+      scope:
+        - entity.other.attribute-name.id.html
+        - meta.directive.vue entity.other.attribute-name.html
+      settings:
+        foreground: *VIOLET1
+    - name: CSS ID's
+      scope: source.sass keyword.control
+      settings:
+        foreground: *BLUE
+    - name: CSS psuedo selectors
+      scope:
+        - entity.other.attribute-name.pseudo-class
+        - entity.other.attribute-name.pseudo-element
+        - entity.other.attribute-name.placeholder
+        - meta.property-list meta.property-value
+      settings:
+        foreground: *VIOLET1
+    - name: Inserted
+      scope: markup.inserted
+      settings:
+        foreground: *INSERTED
+    - name: Deleted
+      scope: markup.deleted
+      settings:
+        foreground: *DELETED
+    - name: Changed
+      scope: markup.changed
+      settings:
+        foreground: *CHANGED
+    - name: Regular Expressions
+      scope: string.regexp
+      settings:
+        foreground: *REGEX
+    - name: Regular Expressions - Punctuation
+      scope: punctuation.definition.group
+      settings:
+        foreground: *RED2
+    - name: Regular Expressions - Character Class
+      scope:
+        - constant.other.character-class.regexp
+      settings:
+        foreground: *VIOLET1
+    - name: Regular Expressions - Character Class Set
+      scope:
+        - constant.other.character-class.set.regexp
+        - punctuation.definition.character-class.regexp
+      settings:
+        foreground: *YELLOW
+    - name: Regular Expressions - Quantifier
+      scope: keyword.operator.quantifier.regexp
+      settings:
+        foreground: *LIGHT_BLUE2
+    - name: Regular Expressions - Backslash
+      scope: constant.character.escape.backslash
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Escape Characters
+      scope: constant.character.escape
+      settings:
+        foreground: *LIGHT_BLUE2
+    - name: Decorators
+      scope:
+        - tag.decorator.js entity.name.tag.js
+        - tag.decorator.js punctuation.definition.tag.js
+      settings:
+        foreground: *BLUE
+    - name: CSS Units
+      scope: keyword.other.unit
+      settings:
+        foreground: *RED2
+    - name: JSON Key - Level 0
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *BLUE
+    - name: JSON Key - Level 1
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *TEAL
+    - name: JSON Key - Level 2
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *LIGHT_BLUE
+    - name: JSON Key - Level 3
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *VIOLET1
+    - name: JSON Key - Level 4
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *YELLOW
+    - name: JSON Key - Level 5
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *TEAL
+    - name: JSON Key - Level 6
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *TEAL2
+    - name: JSON Key - Level 7
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *RED2
+    - name: JSON Key - Level 8
+      scope:
+        - >-
+          source.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          meta.structure.dictionary.value.json meta.structure.dictionary.json
+          support.type.property-name.json
+      settings:
+        foreground: *GREEN1
+    - name: Plain Punctuation
+      scope: punctuation.definition.list_item.markdown
+      settings:
+        foreground: *LIGHT_BLUE4
+    - name: Block Punctuation
+      scope:
+        - meta.block
+        - meta.brace
+        - punctuation.definition.block
+        - punctuation.definition.use
+        - punctuation.definition.class
+        - punctuation.definition.begin.bracket
+        - punctuation.definition.end.bracket
+        - punctuation.definition.switch-expression.begin.bracket
+        - punctuation.definition.switch-expression.end.bracket
+        - punctuation.definition.section.switch-block.begin.bracket
+        - punctuation.definition.section.switch-block.end.bracket
+        - punctuation.definition.group.shell
+        - punctuation.definition.parameters
+        - punctuation.definition.arguments
+        - punctuation.definition.dictionary
+        - punctuation.definition.array
+        - punctuation.section
+      settings:
+        foreground: *LIGHT_BLUE4
+    - name: Markdown - Plain
+      scope:
+        - meta.jsx.children
+        - meta.embedded.block
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: HTML text
+      scope: text.html
+      settings:
+        foreground: *GREY3
+    - name: Markdown - Markup Raw Inline
+      scope: text.html.markdown markup.inline.raw.markdown
+      settings:
+        foreground: *VIOLET1
+    - name: Markdown - Markup Raw Inline Punctuation
+      scope: >-
+        text.html.markdown markup.inline.raw.markdown
+        punctuation.definition.raw.markdown
+      settings:
+        foreground: *DARK_BLUE
+    - name: Markdown - Headings 1
+      scope:
+        - heading.1.markdown entity.name
+        - heading.1.markdown punctuation.definition.heading.markdown
+        - heading.2.markdown entity.name
+        - heading.2.markdown punctuation.definition.heading.markdown
+        - heading.3.markdown entity.name
+        - heading.3.markdown punctuation.definition.heading.markdown
+        - heading.4.markdown entity.name
+        - heading.4.markdown punctuation.definition.heading.markdown
+        - heading.5.markdown entity.name
+        - heading.5.markdown punctuation.definition.heading.markdown
+        - heading.6.markdown entity.name
+        - heading.6.markdown punctuation.definition.heading.markdown
+      settings:
+        fontStyle: bold
+        foreground: *LIGHT_BLUE2
+    - name: Markup - Italic
+      scope:
+        - markup.italic
+        - markup.italic punctuation
+      settings:
+        fontStyle: italic
+        foreground: *LIGHT_BLUE3
+    - name: Markup - Bold
+      scope:
+        - markup.bold
+        - markup.bold punctuation
+      settings:
+        fontStyle: bold
+        foreground: *LIGHT_BLUE3
+    - name: Markup - Bold-Italic
+      scope:
+        - markup.bold markup.italic
+        - markup.bold markup.italic punctuation
+      settings:
+        fontStyle: bold italic
+        foreground: *LIGHT_BLUE3
+    - name: Markup - Underline
+      scope:
+        - markup.underline
+        - markup.underline punctuation
+      settings:
+        fontStyle: underline
+    - name: Markdown - Blockquote
+      scope: markup.quote punctuation.definition.blockquote.markdown
+      settings:
+        foreground: *DARK_BLUE
+    - name: Markup - Quote
+      scope: markup.quote
+      settings:
+        fontStyle: italic
+    - name: Markdown - Link
+      scope:
+        - string.other.link
+        - markup.underline.link
+        - constant.other.reference.link.markdown
+        - string.other.link.description.title.markdown
+      settings:
+        foreground: *TEAL2
+    - name: Markdown - Fenced Code Block
+      scope:
+        - markup.fenced_code.block.markdown
+        - markup.inline.raw.string.markdown
+        - variable.language.fenced.markdown
+      settings:
+        foreground: *LIGHT_BLUE2
+    - name: Markdown - Separator
+      scope: meta.separator
+      settings:
+        fontStyle: bold
+        foreground: *DARK_BLUE2
+    - name: Markup - Table
+      scope: markup.table
+      settings:
+        foreground: *LIGHT_BLUE3
+    - name: Token - Info
+      scope: token.info-token
+      settings:
+        foreground: *TEAL
+    - name: Token - Warn
+      scope: token.warn-token
+      settings:
+        foreground: *WARN
+    - name: Token - Error
+      scope: token.error-token
+      settings:
+        foreground: *ERROR
+    - name: Token - Debug
+      scope: token.debug-token
+      settings:
+        foreground: *DEBUG
+    - name: Apache Tag
+      scope: entity.tag.apacheconf
+      settings:
+        foreground: *RED2
+    - name: Preprocessor
+      scope:
+        - meta.preprocessor
+      settings:
+        foreground: *TEAL2
+    - name: ENV value
+      scope: source.env
+      settings:
+        foreground: *BLUE

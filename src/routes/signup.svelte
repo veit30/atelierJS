@@ -1,9 +1,18 @@
 <script lang="ts" context="module">
-	export { redirectIfSession as load } from '$lib/helper';
+	import type { Load } from './__types/signup.d';
+
+	export const load: Load = async ({ session }) => {
+		if (!session.user)
+			return {
+				status: 302,
+				redirect: `/`
+			};
+		return {};
+	};
 </script>
 
 <script lang="ts">
-	import { auth } from '@svuick/supabase/app';
+	import { supabase } from '$lib/db';
 	import { useForm, Hint } from '@svuick/form';
 	const form = useForm();
 
@@ -12,7 +21,7 @@
 	let password: string = 'testuser';
 
 	async function handleSubmit() {
-		const { error, data } = await auth.signUp({ email, password });
+		const { error } = await supabase.auth.signUp({ email, password });
 		if (error) console.log(error);
 	}
 </script>

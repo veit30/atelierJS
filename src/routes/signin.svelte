@@ -1,11 +1,20 @@
 <script lang="ts" context="module">
-	export { redirectIfSession as load } from '$lib/helper';
+	import type { Load } from './__types/signin.d';
+
+	export const load: Load = async ({ session }) => {
+		if (!session.user)
+			return {
+				status: 302,
+				redirect: `/`
+			};
+		return {};
+	};
 </script>
 
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { auth } from '@svuick/supabase/app';
+	import { supabase } from '$lib/db';
 	import { useForm, Hint } from '@svuick/form';
 	const form = useForm();
 
@@ -14,7 +23,7 @@
 
 	async function handleSubmit() {
 		const redirect = $page.url.searchParams.get('redirectTo') ?? '/';
-		const { error } = await auth.signIn({ email, password });
+		const { error } = await supabase.auth.signIn({ email, password });
 		if (error) console.log(error);
 		goto(redirect);
 	}
