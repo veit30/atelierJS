@@ -65,9 +65,7 @@ export function createIframeSourceCode({
 		}
 
 		${Object.entries(params)
-			.map(([key, val]) => {
-				return `const ${key} = ${val};`;
-			})
+			.map(([key, val]) => `const ${key} = ${val};`)
 			.join('\n\t\t')}
 	</script>
 </head>
